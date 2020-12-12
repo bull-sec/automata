@@ -1,16 +1,18 @@
 #!/bin/bash
 
 RED='\033[0;41;30m'
+PURP='\033[0;45;30m'
+GREN='\033[0;42;30m'
 STD='\033[0;0;39m'
 targets=$1
 outdir=$2
 
 # "Banner" lol
-echo -e "\n${RED}Automata (the glorifed wrapper) v0.1${STD}\n"
+echo -e "\n${RED}Automata (a BASH command you could probably memorise...) v0.2${STD}\n"
 
 # Usage
 display_usage() {
-                echo "Usage: ./automata.sh /path/to/target/file.txt /output/path"
+                echo -e "${GREN}Usage: ./automata.sh /path/to/target/file.txt /output/path{$STD}"
 }
 
 if [ $# -le 1 ]
@@ -53,10 +55,10 @@ quick(){
 
 full(){
 	make_dirs
-	echo "Full scan selected, this can take some time"
+	echo -e "${RED}Full scan selected, this can take some time${STD}"
 	for ip in $(cat $targets); do nmap -p- -Pn -vvv -n $ip -oN $outdir/nmap_results/all_ports_$ip ; done
 
-	echo -e '[*] - Found the following open ports: '
+	echo -e "[*] - ${RED}Found the following open ports: ${STD}\n"
 	echo -n $( cat $outdir/nmap_results/all_ports_$ip  | grep open | cut -d "/" -f1) | sed 's/ /,/g' | tee $outdir/nmap_results/port_list_$ip
 	for ip in $(cat $targets); do  nmap -sV -sC -vvv -p $(cat $outdir/nmap_results/port_list_$ip) $ip -oN $outdir/nmap_results/targetted_scan_$ip.nmap ; done
 	create_notes
@@ -66,7 +68,7 @@ full(){
 create_notes(){
 
 	sleep 2
-	echo "Creating Notes"
+	echo -e "${PURP}Creating Notes${STD}"
 	sleep 2
 	for ip in $(cat $targets); do echo -e "# Target - $ip\n" ; done | tee Notes.md
 	echo -e "*Open Ports*\n" | tee -a Notes.md
