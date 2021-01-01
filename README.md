@@ -5,6 +5,7 @@ Just a little script that we put together in BASH to help automate our initial n
 - Creates initial directories
 - Performs `nmap` scan(s)
 - Parses `nmap` results and generates a basic notes template
+- Highlights webservers and other interesting ports
 
 `Usage: ./automata.sh /path/to/target/file.txt /output/`
 
@@ -36,11 +37,6 @@ It's provided without warranty, so if it somehow breaks your machine we're not r
 ```
 # Target - 127.0.0.1
 
-*Open Ports*
-
-- 80
-- 3306
-
 *Nmap Results (clipped)*
 
 \```
@@ -60,18 +56,3 @@ It's provided without warranty, so if it somehow breaks your machine we're not r
 
 > Note: ignore the \ on the "Nmap Results (clipped)" section above, that's only there because rendering Markdown inside Markdown is awkward. 
 
-
---- 
-
-
-TODO:
-
-- [ ] Add more `nmap` scan variations
-
-- [ ] Add option to hide output/increase verbosity
-
-- [ ] Implement some basic fuzzing/scanning/banner-grabbing for detected HTTP/S servers
-
-- [ ] Make menu persistent (ask to continue scanning after completion)
-
-- [ ] Allow for multiple scans (from list of hosts)
