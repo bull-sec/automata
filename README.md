@@ -7,9 +7,11 @@ Just a little script that we put together in BASH to help automate our initial n
 - Parses `nmap` results and generates a basic notes template
 - Highlights webservers and other interesting ports
 
-`Usage: ./automata.sh /path/to/target/file.txt /output/`
+`Usage: ./automata.sh`
 
-Handy way to use it is to add the script as an alias in your `.bashrc` file then you can run it inside a new directory.
+Recommended Workflow: Add the script as an alias in your `.bashrc` file then run it from inside a new directory
+
+> Note: while the script can handle multiple targets, for your own sanity it's probably best you make separate directories for each target
 
 ```bash
 $ mkdir /home/user/Target
