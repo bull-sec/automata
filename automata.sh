@@ -9,7 +9,7 @@ targets=$1
 outdir=$2
 
 # "Banner" lol
-echo -e "\n${RED}Automata (a BASH command you could probably memorise...) v0.2${STD}\n"
+echo -e "\n${RED}Automata (OK, at this point it's doing more than one thing, cut me a break) v0.3${STD}\n"
 
 # Usage
 display_usage() {
