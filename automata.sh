@@ -3,6 +3,7 @@
 RED='\033[0;41;30m'
 PURP='\033[0;45;30m'
 GREN='\033[0;42;30m'
+ORNG='\033[0;43;30m'
 STD='\033[0;0;39m'
 targets=$1
 outdir=$2
@@ -36,6 +37,9 @@ main_loop(){
 		4) exit 0;;
 		*) echo -e "${RED}Error...${STD}" && sleep 2
 	esac
+	webserver_check
+	interesting_ports
+	summary
 }
 
 
@@ -71,11 +75,6 @@ create_notes(){
 	echo -e "${PURP}Creating Notes${STD}"
 	sleep 2
 	for ip in $(cat $targets); do echo -e "# Target - $ip\n" ; done | tee Notes.md
-	echo -e "*Open Ports*\n" | tee -a Notes.md
-	# Get Port List
-	for port in $(cat $outdir/nmap_results/*.nmap | grep open | cut -d "/" -f1); do 
-		echo - $port | tee -a Notes.md
-	done
 
 	# Dump Nmap Results
 	echo -e "\n*Nmap Results (clipped)*" | tee -a Notes.md
@@ -88,7 +87,57 @@ create_notes(){
 	for port in $(cat $outdir/nmap_results/*.nmap | grep open | cut -d "/" -f1); do
 		echo -e "### $port\n" | tee -a Notes.md
 	done
+
+	}
+
+webserver_check(){
+	echo -e "${RED}[*] - Found $(cat $outdir/nmap_results/port_list_$ip | sed 's/,/\n/g' | wc -l) Running Services${STD}"
+	for port in $(cat $outdir/nmap_results/port_list_$ip | sed 's/,/\n/g'); do 
+		if [ $port == "80" ] || 
+			[ $port == "443" ] || 
+			[ $port == "3000" ] ||
+			[ $port == "5000" ] ||
+			[ $port == "7443" ] ||
+			[ $port == "8000" ] || 
+			[ $port == "8001" ] ||
+			[ $port == "8008" ] ||
+			[ $port == "8080" ] ||
+			[ $port == "8083" ] ||
+			[ $port == "8443" ] ||
+			[ $port == "8834" ] ||
+			[ $port == "8888" ]; then
+		       echo -e "${PURP}Possible Webserver Found on Port:" $port ${STD};
+		else
+			continue
+		fi
+	done
 }
+
+interesting_ports(){
+	echo -e "${ORNG}[!] - Found some other interesting ports:${STD}"
+	for port in $(cat $outdir/nmap_results/port_list_$ip | sed 's/,/\n/g'); do
+		if [ $port == "21" ] ||
+			[ $port == "23" ] ||
+			[ $port == "3306" ] ||
+			[ $port == "3389" ] ||
+			[ $port == "5432" ] ||
+			[ $port == "1433" ] ||
+			[ $port == "1434" ] ||
+			[ $port == "5900" ]; then
+			echo -e "${ORNG} [$] $port ${STD}"
+		else
+			continue
+		fi
+	done
+}
+
+summary(){
+	echo -e "\n"
+	echo -e "${PURP}Notes written to $(readlink -f $outdir) ${STD}"
+	echo -e "${PURP}Scans written to $(readlink -f $outdir/nmap_results/) ${STD}"
+	echo -e "${RED}GOOD HUNTING! ${STD}"
+}
+
 
 main_loop
 
