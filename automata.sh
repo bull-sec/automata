@@ -14,6 +14,7 @@ outdir=$(pwd)
 
 getTarget(){
 	read -p "Enter Target IP: " targets
+	echo $targets > target.txt
 	echo -e "\n"
 }
 
