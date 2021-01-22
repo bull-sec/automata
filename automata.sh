@@ -19,15 +19,9 @@ getTarget(){
 }
 
 banner(){
-<<<<<<< HEAD
-	clear
-	echo -e "\n${RED}Automata v0.5 (by @bullsecSecurity)${STD}\n"
-	echo -e "${RRED}
-=======
     clear
     echo -e "${RED}Automata (Using escape characters to look fancy since 2020) v0.5${STD}\n"
     echo -e "${RRED}
->>>>>>> 51c39342a81530a4036dbb853c3be6da5e4e2b45
  ▄▄▄       █    ██ ▄▄▄█████▓ ▒█████   ███▄ ▄███▓ ▄▄▄     ▄▄▄█████▓ ▄▄▄      
  ▒████▄     ██  ▓██▒▓  ██▒ ▓▒▒██▒  ██▒▓██▒▀█▀ ██▒▒████▄   ▓  ██▒ ▓▒▒████▄    
  ▒██  ▀█▄  ▓██  ▒██░▒ ▓██░ ▒░▒██░  ██▒▓██    ▓██░▒██  ▀█▄ ▒ ▓██░ ▒░▒██  ▀█▄  
