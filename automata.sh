@@ -11,6 +11,7 @@ RRED='\e[31m'
 STD='\033[0;0;39m'
 targets=$(cat target.txt)
 outdir=$(pwd)
+AUTOMATA_PATH="/home/bulldops/Dropbox/Automata"
 
 getTarget(){
     read -p "Enter Target IP: " targets
@@ -90,6 +91,7 @@ make_dirs(){
     mkdir -p $outdir/nmap_results
     mkdir -p $outdir/screenshots
     mkdir -p $outdir/www
+    cp -R $AUTOMATA_PATH/.vscode $outdir/
     echo -e "\n${RED}Directories Created${STD}\n"
 }
 
