@@ -3,6 +3,11 @@
 # A wrapper around Nmap for scanning
 # Author: @bullsecSecurity
 
+# Added Privileged mode for Custom Scans
+# Add the following capabilities to nmap to allow this
+# sudo setcap cap_net_raw,cap_net_admin,cap_net_bind_service+eip /usr/bin/nmap
+# nmap --privileged should then be aliased
+
 RED='\033[0;41;30m'
 PURP='\033[0;45;30m'
 GREN='\033[0;42;30m'
@@ -11,7 +16,7 @@ RRED='\e[31m'
 STD='\033[0;0;39m'
 targets=$(cat target.txt)
 outdir=$(pwd)
-AUTOMATA_PATH="/home/bulldops/Dropbox/Automata"
+AUTOMATA_PATH="/home/kali/Tools/automata"
 
 getTarget(){
     read -p "Enter Target IP: " targets
@@ -101,7 +106,7 @@ custom(){
     echo -e "${RED}[!] - WARNING, CUSTOM SCANS OVERIDE ANY OTHER SCAN RESULTS ${STD}\n"
     read -p "Please Enter Custom Scan Arguments: " custom_scan
 
-    for ip in $targets; do nmap $custom_scan $ip -oN $outdir/nmap_results/custom_scan_$ip.nmap ; done
+    for ip in $targets; do /usr/bin/nmap --privileged $custom_scan $ip -oN $outdir/nmap_results/custom_scan_$ip.nmap ; done
     echo -n $( cat $outdir/nmap_results/custom_scan_$ip.nmap  | grep open | cut -d "/" -f1) | sed 's/ /,/g' > $outdir/nmap_results/port_list_$ip
     create_notes
     summary
