@@ -129,7 +129,7 @@ full(){
     echo -n $( cat $outdir/nmap_results/all_ports_$ip  | grep open | cut -d "/" -f1) | sed 's/ /,/g' > $outdir/nmap_results/port_list_$ip
 
     # Run Nmap Service Scan on list of ports
-    for ip in $targets; do  nmap -sV -sC -vvv -p $(cat $outdir/nmap_results/port_list_$ip) $ip -oN $outdir/nmap_results/targetted_scan_$ip.nmap ; done
+    for ip in $targets; do  nmap -sV -sC -vvv -Pn -p $(cat $outdir/nmap_results/port_list_$ip) $ip -oN $outdir/nmap_results/targetted_scan_$ip.nmap ; done
     create_notes
     summary
 }
@@ -156,7 +156,7 @@ create_notes(){
     echo -e "IP Address: $(cat target.txt)" >> Notes.md
     if [ -f "$outdir/nmap_results/custom_scan_$targets.nmap" ]; then
         echo -e "[*] - Hostname: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "scan report" | awk '{print $5}') ${STD}"
-        echo -e "[*] - DNS Name: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq) ${STD}\n"
+        echo -e "[*] - DNS/Common/Host Name: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq) ${STD}\n"
     else
         echo -e "Hostname: $(cat $outdir/nmap_results/targetted_scan_$targets.nmap | grep "scan report" | awk '{print $5}')" >> Notes.md
         echo -e "DNS Name: $(cat $outdir/nmap_results/targetted_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq)" >> Notes.md
