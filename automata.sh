@@ -156,7 +156,7 @@ create_notes(){
     echo -e "IP Address: $(cat target.txt)" >> Notes.md
     if [ -f "$outdir/nmap_results/custom_scan_$targets.nmap" ]; then
         echo -e "[*] - Hostname: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "scan report" | awk '{print $5}') ${STD}"
-        echo -e "[*] - DNS/Common/Host Name: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq) ${STD}\n"
+        echo -e "[*] - DNS/Host/Common Name: ${GREN} $(cat $outdir/nmap_results/custom_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq) ${STD}\n"
     else
         echo -e "Hostname: $(cat $outdir/nmap_results/targetted_scan_$targets.nmap | grep "scan report" | awk '{print $5}')" >> Notes.md
         echo -e "DNS Name: $(cat $outdir/nmap_results/targetted_scan_$targets.nmap | grep "DNS_Computer_Name:" | awk '{print $3}' | uniq)" >> Notes.md
