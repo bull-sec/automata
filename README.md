@@ -50,3 +50,4 @@ This is the summary function of the Automata script, it requires a target.txt fi
 - [x] - Allow for custom `nmap` scans
 - [ ] - Make a "boring" version with no colours
 - [ ] - Add option to turn colours on/off
+- [x] - Realise that the "boring version" and being able to turn the colours on/off are the same feature
