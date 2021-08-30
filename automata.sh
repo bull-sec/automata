@@ -73,7 +73,8 @@ main_loop(){
     echo "6. Update/Change Target"
     echo "7. Dump File Tree"
     echo "8. Show the AWESOME banner again"
-    echo -e "9. Exit\n" 
+    echo "9. Create Notes Template"
+    echo -e "0. Exit\n" 
     local choice
     read -p "Enter choice [ 1 - 9 ] " choice
     clear
@@ -86,7 +87,8 @@ main_loop(){
         6) getTarget ;;
         7) dump_filetree ;;
         8) banner ;;
-        9) exit 0;;
+	9) create_notes ;;
+        0) exit 0;;
         *) echo -e "${RED}Error...${STD}" && sleep 2
     esac
 done
