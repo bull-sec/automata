@@ -174,6 +174,14 @@ create_notes(){
     fi
     echo -e "\`\`\`\n" >> Notes.md
 
+    # Print Headers
+    echo -e '---' >> Notes.md
+    echo -e '\n## Enumeration\n' >> Notes.md
+    echo -e '\n## Exploitation\n' >> Notes.md
+    echo -e '\n## Privilege Escalation\n' >> Notes.md
+    echo -e '\n## Proof\n' >> Notes.md
+    echo -e '\n## Remediation\n' >> Notes.md
+
     }
 
 webserver_check(){                                                                                   
