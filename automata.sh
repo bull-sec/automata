@@ -99,6 +99,7 @@ make_dirs(){
     mkdir -p $outdir/screenshots
     mkdir -p $outdir/www
     cp -R $AUTOMATA_PATH/.vscode $outdir/
+    cp $AUTOMATA_PATH/http_notes_template.md $outdir/
     echo -e "\n${RED}Directories Created${STD}\n"
 }
 
