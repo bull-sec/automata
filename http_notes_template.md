@@ -7,3 +7,4 @@
 - Certificate Checked:
 - Technologies:
 - WAF:
+- Bad Redirects:
