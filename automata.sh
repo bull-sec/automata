@@ -186,6 +186,8 @@ create_notes(){
     fi
     echo -e "\`\`\`\n" >> Notes.md
 
+    echo -e '*UDP Scan Results*\n' >> Notes.md
+
     # Print Headers
     echo -e '---' >> Notes.md
     echo -e '\n## Enumeration\n' >> Notes.md
@@ -232,6 +234,7 @@ interesting_ports(){
                         [ $port == "1433" ] ||
                         [ $port == "1434" ] ||
                         [ $port == "5900" ] ||
+			[ $port == "5985" ] ||
                         [ $port == "33060" ]; then
                         echo -e "[*] - ${ORNG} $port ${STD}"
                 else
