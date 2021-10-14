@@ -16,12 +16,22 @@ RRED='\e[31m'
 STD='\033[0;0;39m'
 targets=$(cat target.txt)
 outdir=$(pwd)
-AUTOMATA_PATH="/home/kali/Tools/automata"
+AUTOMATA_PATH="~/Tools/automata"
 
 getTarget(){
     read -p "Enter Target IP: " targets
     echo $targets > target.txt
     echo -e "\n"
+}
+
+updateTarget(){
+    read -p "Enter Target IP: " targets
+    echo $targets > target.txt
+    echo -e "\n"
+    cp $outdir/nmap_results/all_ports_* $outdir/nmap_results/all_ports_$targets.nmap
+    cp $outdir/nmap_results/targetted_scan_* $outdir/nmap_results/targetted_scan_$targets.nmap
+    cp $outdir/nmap_results/port_list* $outdir/nmap_results/port_list_$targets.nmap
+    echo -e "${RED}TARGET UPDATED ${STD}\n"
 }
 
 banner(){
@@ -84,7 +94,7 @@ main_loop(){
         3) full ;;
         4) nmap_results ;;
         5) summary ;;
-        6) getTarget ;;
+        6) updateTarget ;;
         7) dump_filetree ;;
         8) banner ;;
 	9) create_notes ;;
