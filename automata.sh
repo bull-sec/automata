@@ -137,13 +137,13 @@ full(){
     echo -e "${RED}Full scan selected, this can take some time${STD}\n"
 
     # Run a full port scan
-    for ip in $targets; do nmap -p- -Pn -vvv -n $ip -oN $outdir/nmap_results/all_ports_$ip ; done
+    for ip in $targets; do /usr/bin/nmap --privileged -p- -Pn -vvv -n $ip -oN $outdir/nmap_results/all_ports_$ip ; done
 
     # Compile a list of ports
     echo -n $( cat $outdir/nmap_results/all_ports_$ip  | grep open | cut -d "/" -f1) | sed 's/ /,/g' > $outdir/nmap_results/port_list_$ip
 
     # Run Nmap Service Scan on list of ports
-    for ip in $targets; do  nmap -sV -sC -vvv -Pn -p $(cat $outdir/nmap_results/port_list_$ip) $ip -oN $outdir/nmap_results/targetted_scan_$ip.nmap ; done
+    for ip in $targets; do /usr/bin/nmap --privileged -sV -sC -vvv -Pn -p $(cat $outdir/nmap_results/port_list_$ip) $ip -oN $outdir/nmap_results/targetted_scan_$ip.nmap ; done
     create_notes
     summary
 }
