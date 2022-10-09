@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # A wrapper around Nmap for scanning
-# Author: @bullsecSecurity
+# Author: @bullsecsecure
 
 # Added Privileged mode for Custom Scans
 # Add the following capabilities to nmap to allow this
@@ -36,7 +36,7 @@ updateTarget(){
 
 banner(){
     clear
-    echo -e "${RED}Automata (Using escape characters to look fancy since 2020) v0.5${STD}\n"
+    echo -e "${RED}Automata (Using escape characters to look fancy since 2020) v0.6${STD}\n"
     echo -e "${RRED}
  ▄▄▄       █    ██ ▄▄▄█████▓ ▒█████   ███▄ ▄███▓ ▄▄▄     ▄▄▄█████▓ ▄▄▄      
  ▒████▄     ██  ▓██▒▓  ██▒ ▓▒▒██▒  ██▒▓██▒▀█▀ ██▒▒████▄   ▓  ██▒ ▓▒▒████▄    
